@@ -205,7 +205,9 @@ export class SigninApiService {
 			}
 
 			if (same) {
+				// Check if the password is still hashed using bcrypt
 				if (profile.password!.startsWith('$2')) {
+					// Rehash the password using Argon2
 					const newHash = await argon2.hash(password);
 					this.userProfilesRepository.update(user.id, {
 						password: newHash,
@@ -227,7 +229,9 @@ export class SigninApiService {
 			}
 
 			try {
+				// Check if the password is still hashed using bcrypt
 				if (profile.password!.startsWith('$2')) {
+					// Rehash the password using Argon2
 					const newHash = await argon2.hash(password);
 					this.userProfilesRepository.update(user.id, {
 						password: newHash,
